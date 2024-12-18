@@ -10,6 +10,11 @@
     "description": "Link your bank account to enable seamless transactions."
   },
   {
+    "title": "Linked to your buddy",
+    "status": "complete",
+    "description": "your buddy is <b>@christophe.prigent</b>"
+  },
+  {
     "title": "Set up spending notifications",
     "status": "not started",
     "description": "Configure alerts to stay informed about your financial activity."

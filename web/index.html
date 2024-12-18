@@ -49,7 +49,7 @@
         const onboardingStepsList = document.getElementById('onboarding-steps');
         steps.forEach((step, index) => {
           const listItem = document.createElement('li');
-          listItem.innerHTML = `<strong>${step.title}</strong> [${step.status}] : ${step.description}`;
+          listItem.innerHTML = `<label>${step.title}</label> [${step.status}] : ${step.description}`;
           onboardingStepsList.appendChild(listItem);
         });
       })
@@ -71,5 +71,11 @@
       });
     }
   </script>
+  <style>
+    label{
+      min-width: 250px;
+      display: inline-block;
+    }
+  </style>
 </body>
 </html>
