@@ -15,6 +15,11 @@
     "description": "your buddy is <b>@christophe.prigent</b>"
   },
   {
+    "title": "First blood",
+    "status": "in progress",
+    "description": "Configure git and push your first blood"
+  },
+  {
     "title": "Set up spending notifications",
     "status": "not started",
     "description": "Configure alerts to stay informed about your financial activity."
