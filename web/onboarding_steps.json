@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Create an account",
+    "status": "complete",
+    "description": "Set up your user profile and secure your account."
+  },
+  {
+    "title": "Connect your bank",
+    "status": "in progress",
+    "description": "Link your bank account to enable seamless transactions."
+  },
+  {
+    "title": "Set up spending notifications",
+    "status": "not started",
+    "description": "Configure alerts to stay informed about your financial activity."
+  }
+]
