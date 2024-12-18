@@ -2,12 +2,25 @@
   {
     "title": "Create an account",
     "status": "complete",
-    "description": "Set up your user profile and secure your account."
+    "description": "Use your one shot password and set up your personnal password."
   },
   {
-    "title": "Connect your bank",
+    "title": "HR documents",
     "status": "in progress",
-    "description": "Link your bank account to enable seamless transactions."
+    "description": "Integrate your personnal informations in our HR software.",
+    "subtaks": 
+    [{
+      "title": "Bank account",
+      "status": "in progress" 
+    },{
+      "title": "ID",
+      "status": "in progress",
+      "alert":"we need the B face of your ID."
+    },
+    {
+      "title": "Contract signed",
+      "status": "complete" 
+    }]
   },
   {
     "title": "Linked to your buddy",

@@ -38,7 +38,7 @@
   </ol>
 
   <script>
-    fetch('onboarding_steps.json')
+    fetch('/api/onboarding_steps')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -46,15 +46,68 @@
         return response.json();
       })
       .then(steps => {
-        const onboardingStepsList = document.getElementById('onboarding-steps');
-        steps.forEach((step, index) => {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = `
-          <label>${step.title}</label>
-          <span class="status">[${step.status}]</span> :
-          <span class="description"> ${step.description}</span>`;
-          onboardingStepsList.appendChild(listItem);
-        });
+        if (steps && Array.isArray(steps)) {
+          const onboardingStepsList = document.getElementById('onboarding-steps');
+          steps.forEach((step, index) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+              <label>${step.title}</label>
+              <span class="status">`;
+            
+            // Add emoji based on status
+            if (step.status === 'complete') {
+              listItem.innerHTML += '✅ ';
+            } else if (step.status === 'in progress') {
+              listItem.innerHTML += '🚧 ';
+            } else if (step.status === 'not started'){
+              listItem.innerHTML += '⚠️ ';
+            } else {
+              listItem.innerHTML += '❓ ';
+            }
+            listItem.innerHTML += `[${step.status}]</span> :
+              <span class="description"> ${step.description}</span>`;
+  
+            
+              if (step.subtaks) {
+                const taskItems = document.createElement('ul');
+              step.subtaks.forEach((task, index) => {
+                const taskItem = document.createElement('li');
+            
+            taskItem.innerHTML = `
+              <label>${task.title}</label>
+              <span class="status">`;
+            // Add emoji based on status
+            if (task.status === 'complete') {
+              taskItem.innerHTML += '✅ ';
+            } else if (task.status === 'in progress') {
+              taskItem.innerHTML += '🚧 ';
+            } else if (task.status === 'not started'){
+              taskItem.innerHTML += '⚠️ ';
+            } else {
+              taskItem.innerHTML += '❓ ';
+            }
+            if (task.alert) {
+              taskItem.innerHTML += `<span class="alert">${task.alert}</span>`
+            }
+  
+            taskItem.innerHTML += `[${task.status}]</span>
+              <span class="description"> ${(task.description)?task.description:''}</span>`;
+            taskItems.appendChild(taskItem);
+          });
+            listItem.append(taskItems);
+  
+        }// subtask
+          
+            onboardingStepsList.appendChild(listItem);
+          });
+        } else {
+          // Handle the case where the API returns an invalid response or no data.
+          const onboardingStepsList = document.getElementById('onboarding-steps');
+          const errorItem = document.createElement('li');
+          errorItem.textContent = 'Onboarding steps not available.';
+          onboardingStepsList.appendChild(errorItem);
+          console.warn("API call failed or returned invalid data.");
+        }
       })
       .catch(error => {
         const onboardingStepsList = document.getElementById('onboarding-steps');
