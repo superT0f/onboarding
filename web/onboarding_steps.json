@@ -1,26 +1,47 @@
 [
   {
-    "title": "Create an account",
-    "status": "complete",
-    "description": "Use your one shot password and set up your personnal password."
+    "title": "Account",
+    "status": "in progress",
+    "description": "IT equipment setup for dev profil.",
+    "subtaks": [
+      {
+        "title": "retrieve computer",
+        "status": "complete"
+      },
+      {
+        "title": "set up your personnal password.",
+        "status": "in progress",
+        "alert": "reset your password <a href='#reset'>here</a>"
+      },
+      {
+        "title": "vpn setup",
+        "status": "complete"
+      },
+      {
+        "title": "2fa setup",
+        "status": "not started"
+      }
+    ]
   },
   {
-    "title": "HR documents",
+    "title": "HR documents ",
     "status": "in progress",
     "description": "Integrate your personnal informations in our HR software.",
-    "subtaks": 
-    [{
-      "title": "Bank account",
-      "status": "in progress" 
-    },{
-      "title": "ID",
-      "status": "in progress",
-      "alert":"we need the B face of your ID."
-    },
-    {
-      "title": "Contract signed",
-      "status": "complete" 
-    }]
+    "subtaks": [
+      {
+        "title": "Bank account",
+        "status": "in progress"
+      },
+      {
+        "title": "ID",
+        "status": "in progress",
+        "alert": "we need the B face of your ID."
+      },
+      {
+        "title": "Contract signed",
+        "status": "complete"
+      }
+    ]
   },
   {
     "title": "Linked to your buddy",
@@ -28,9 +49,23 @@
     "description": "your buddy is <b>@christophe.prigent</b>"
   },
   {
-    "title": "First blood",
+    "title": "IT First blood",
     "status": "in progress",
-    "description": "Configure git and push your first blood"
+    "description": "Configure git and push your first blood",
+    "subtaks": [
+      {
+        "title": "clone the repo",
+        "status": "in progress"
+      },
+      {
+        "title": "generate ssh keys",
+        "status": "in progress"
+      },
+      {
+        "title": "read contrib rules and push",
+        "status": "in progress"
+      }
+    ]
   },
   {
     "title": "Set up spending notifications",

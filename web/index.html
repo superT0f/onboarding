@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,18 +28,31 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>myapp</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
-  <h1>Onboarding Steps</h1>
+  <h1>👋 Onboarding Steps</h1>
+  <h2 id="onboarding-intro"></h2>
   <ol id="onboarding-steps">
   </ol>
 
   <script>
-    fetch('/api/onboarding_steps')
+    function getEmoji(status) {
+      emoji = '❓';
+      if (status === 'complete')
+        emoji = '✅';
+      else if (status === 'in progress')
+        emoji = '🚧';
+      else if (status === 'not started')
+        emoji = '⚠️';
+
+      return emoji;
+    }
+    fetch('onboarding_steps.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -48,58 +62,49 @@
       .then(steps => {
         if (steps && Array.isArray(steps)) {
           const onboardingStepsList = document.getElementById('onboarding-steps');
+          const intro = document.getElementById('onboarding-intro');
+          todo = 0;
+          done = 0;
           steps.forEach((step, index) => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `
+            todo++;
+            if (step.status === 'complete') {
+              done++;
+            }
+            listItem.innerHTML = `${getEmoji(step.status)} 
               <label>${step.title}</label>
               <span class="status">`;
-            
+
             // Add emoji based on status
-            if (step.status === 'complete') {
-              listItem.innerHTML += '✅ ';
-            } else if (step.status === 'in progress') {
-              listItem.innerHTML += '🚧 ';
-            } else if (step.status === 'not started'){
-              listItem.innerHTML += '⚠️ ';
-            } else {
-              listItem.innerHTML += '❓ ';
-            }
-            listItem.innerHTML += `[${step.status}]</span> :
+            listItem.innerHTML += ` [${step.status}]</span> :
               <span class="description"> ${step.description}</span>`;
-  
-            
-              if (step.subtaks) {
-                const taskItems = document.createElement('ul');
+
+
+            if (step.subtaks) {
+              const taskItems = document.createElement('ul');
               step.subtaks.forEach((task, index) => {
                 const taskItem = document.createElement('li');
-            
-            taskItem.innerHTML = `
+
+                taskItem.innerHTML = `
               <label>${task.title}</label>
               <span class="status">`;
-            // Add emoji based on status
-            if (task.status === 'complete') {
-              taskItem.innerHTML += '✅ ';
-            } else if (task.status === 'in progress') {
-              taskItem.innerHTML += '🚧 ';
-            } else if (task.status === 'not started'){
-              taskItem.innerHTML += '⚠️ ';
-            } else {
-              taskItem.innerHTML += '❓ ';
-            }
-            if (task.alert) {
-              taskItem.innerHTML += `<span class="alert">${task.alert}</span>`
-            }
-  
-            taskItem.innerHTML += `[${task.status}]</span>
-              <span class="description"> ${(task.description)?task.description:''}</span>`;
-            taskItems.appendChild(taskItem);
-          });
-            listItem.append(taskItems);
-  
-        }// subtask
-          
+                // Add emoji based on status
+                taskItem.innerHTML += getEmoji(task.status)+` [${task.status}]</span> `;
+
+                if (task.alert) {
+                  taskItem.innerHTML += ` => <span class="alert">${task.alert}</span>`
+                }
+                taskItem.innerHTML += `<span class="description"> ${(task.description) ? task.description : ''}</span>`;
+                taskItems.appendChild(taskItem);
+              }); // foreach
+              listItem.append(taskItems);
+
+            }// subtask
+
             onboardingStepsList.appendChild(listItem);
           });
+          intro.append(`${done} / ${todo}`);
+            
         } else {
           // Handle the case where the API returns an invalid response or no data.
           const onboardingStepsList = document.getElementById('onboarding-steps');
@@ -128,18 +133,26 @@
     }
   </script>
   <style>
-    label{
+    label {
       min-width: 250px;
       display: inline-block;
     }
-    .status{
+
+    .status {
       min-width: 90px;
       font-weight: bolder;
       display: inline-block;
     }
+
     .description {
       font-style: oblique;
     }
+
+    .alert {
+      text-decoration: underline;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
   </style>
 </body>
+
 </html>
