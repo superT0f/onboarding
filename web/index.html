@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -22,137 +21,18 @@
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="myapp">
+  <meta name="apple-mobile-web-app-title" content="onboarding">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>myapp</title>
+  <title>onboarding</title>
   <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
-  <h1>👋 Onboarding Steps</h1>
-  <h2 id="onboarding-intro"></h2>
-  <ol id="onboarding-steps">
-  </ol>
-
-  <script>
-    function getEmoji(status) {
-      emoji = '❓';
-      if (status === 'complete')
-        emoji = '✅';
-      else if (status === 'in progress')
-        emoji = '🚧';
-      else if (status === 'not started')
-        emoji = '⚠️';
-
-      return emoji;
-    }
-    fetch('onboarding_steps.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(steps => {
-        if (steps && Array.isArray(steps)) {
-          const onboardingStepsList = document.getElementById('onboarding-steps');
-          const intro = document.getElementById('onboarding-intro');
-          todo = 0;
-          done = 0;
-          steps.forEach((step, index) => {
-            const listItem = document.createElement('li');
-            todo++;
-            if (step.status === 'complete') {
-              done++;
-            }
-            listItem.innerHTML = `${getEmoji(step.status)} 
-              <label>${step.title}</label>
-              <span class="status">`;
-
-            // Add emoji based on status
-            listItem.innerHTML += ` [${step.status}]</span> :
-              <span class="description"> ${step.description}</span>`;
-
-
-            if (step.subtaks) {
-              const taskItems = document.createElement('ul');
-              step.subtaks.forEach((task, index) => {
-                const taskItem = document.createElement('li');
-
-                taskItem.innerHTML = `
-              <label>${task.title}</label>
-              <span class="status">`;
-                // Add emoji based on status
-                taskItem.innerHTML += getEmoji(task.status)+` [${task.status}]</span> `;
-
-                if (task.alert) {
-                  taskItem.innerHTML += ` => <span class="alert">${task.alert}</span>`
-                }
-                taskItem.innerHTML += `<span class="description"> ${(task.description) ? task.description : ''}</span>`;
-                taskItems.appendChild(taskItem);
-              }); // foreach
-              listItem.append(taskItems);
-
-            }// subtask
-
-            onboardingStepsList.appendChild(listItem);
-          });
-          intro.append(`${done} / ${todo}`);
-            
-        } else {
-          // Handle the case where the API returns an invalid response or no data.
-          const onboardingStepsList = document.getElementById('onboarding-steps');
-          const errorItem = document.createElement('li');
-          errorItem.textContent = 'Onboarding steps not available.';
-          onboardingStepsList.appendChild(errorItem);
-          console.warn("API call failed or returned invalid data.");
-        }
-      })
-      .catch(error => {
-        const onboardingStepsList = document.getElementById('onboarding-steps');
-        const errorItem = document.createElement('li');
-        errorItem.textContent = 'Onboarding steps not available.';
-        onboardingStepsList.appendChild(errorItem);
-        console.error('Error fetching onboarding steps:', error);
-      });
-  </script>
-  <script>
-    // This script installs service_worker.js to provide PWA functionality to
-    // application. For more information, see:
-    // https://developers.google.com/web/fundamentals/primers/service-workers
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-      });
-    }
-  </script>
-  <style>
-    label {
-      min-width: 250px;
-      display: inline-block;
-    }
-
-    .status {
-      min-width: 90px;
-      font-weight: bolder;
-      display: inline-block;
-    }
-
-    .description {
-      font-style: oblique;
-    }
-
-    .alert {
-      text-decoration: underline;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-  </style>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
-
 </html>

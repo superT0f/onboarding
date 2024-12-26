@@ -1,16 +1,29 @@
-# myapp
+# Onboarding Assistant
 
-A new Flutter project.
+A Dart/Flutter project to ease newcomers onboarding.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a proof of concept and do not use real data.
+To use it, you will need a backend web service on this form : 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```json
+[
+    {
+      "title": "task title",
+      "status": "in progress|complete|not started",
+      "description": "task description",
+      "subtasks": [
+        {
+          "title": "subtask title",
+          "status": "complete|complete|not started",
+          "alert": "optional warning or important message"
+        },
+        /* {...}, */
+      ]
+    },
+    {
+      /* {...}, */
+    }
+  ]
+```

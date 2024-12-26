@@ -3,7 +3,7 @@
     "title": "Account",
     "status": "in progress",
     "description": "IT equipment setup for dev profil.",
-    "subtaks": [
+    "subtasks": [
       {
         "title": "retrieve computer",
         "status": "complete"
