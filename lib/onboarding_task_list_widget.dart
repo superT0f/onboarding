@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +51,7 @@ class ProgressBar extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       direction: Axis.horizontal,
       children:[
-        Text('  Overall progress : ${score.toString()} step(s) on $max', style: TextStyle(fontWeight: FontWeight.bold),),
+        Text('  Overall progress : ${score.toString()} step(s) on $max', style: const TextStyle(fontWeight: FontWeight.bold),),
 LinearPercentIndicator(
                 animation: true,
                 animationDuration: 5500,
