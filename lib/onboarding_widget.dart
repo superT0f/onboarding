@@ -6,9 +6,11 @@ import 'package:onboarding/onboarding_task_list_widget.dart';
 import 'package:onboarding/onboarding_step.dart';
 import 'package:flutter/foundation.dart';
 
+import 'main.dart';
+
 class OnboardingWidget extends StatefulWidget {
   const OnboardingWidget({super.key});
-  final String title = 'welcome aboard';
+  final String title = 'Welcome! Your onboarding progress updates live.';
 
   @override
   State<OnboardingWidget> createState() => _OnboardingState();
@@ -16,14 +18,11 @@ class OnboardingWidget extends StatefulWidget {
 
 class _OnboardingState extends State<OnboardingWidget> {
   List<OnboardingStep> onboardingSteps = List.empty();
-  static String cprDataURL =
-      "https://tof.prigent.website/onboarding/cprigent.json";
-
 
   void _loadData() {
     // String jsonData = "";
     if (onboardingSteps.isEmpty){
-    downloadJson(cprDataURL).then((jsonData) {
+    downloadJson(mockDataURL).then((jsonData) {
       setState(() {
         List<dynamic> jsonResponse = json.decode(jsonData);
         onboardingSteps = jsonResponse
@@ -42,9 +41,10 @@ class _OnboardingState extends State<OnboardingWidget> {
     _loadData();
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onSecondary,
-        title: Text(widget.title),
+        title: Text(widget.title, style: const TextStyle(fontSize: 31.0)),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

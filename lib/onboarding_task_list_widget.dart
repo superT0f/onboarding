@@ -33,6 +33,7 @@ class OnboardingTaskListWidget extends StatelessWidget {
         }
         // items.add(       ProgressBar(onboardingSteps:onboardingSteps));
     return Column(
+      spacing: 15.0,
       children: items,
     );
   }
@@ -46,7 +47,6 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var (score, max, percent) = _calculateProgress();
-    // return const Row(children:[Text('todo')]);
     return Flex(
       mainAxisSize: MainAxisSize.max,
       direction: Axis.horizontal,
@@ -60,7 +60,7 @@ LinearPercentIndicator(
                 percent: percent,
                 center: Text(
                   '${(percent*100.0).toStringAsFixed(1)}%',
-                  style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
                 ),
                 trailing: const Icon(Icons.mood_sharp),
                 // linearStrokeCap: BarRadius.roundAll,
@@ -71,7 +71,13 @@ LinearPercentIndicator(
 
     );
   }
-  
+
+  /// Calculates the overall progress of the onboarding process based on the provided steps.
+  ///
+  /// Returns a tuple containing:
+  ///   - The number of completed steps and subtasks (int).
+  ///   - The total number of steps and subtasks (int).
+  ///   - The progress percentage (double), which is the ratio of completed items to total items.
   (int, int, double) _calculateProgress() {
     var score = 0;
     var max = 0;

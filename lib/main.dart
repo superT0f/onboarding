@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'onboarding_widget.dart';
 
+// TODO : replace this with your real endpoint URL
+String mockDataURL =
+    "https://tof.prigent.site/onboarding/cprigent.json";
+
 void main() {
   runApp(const Onboarding());
 }

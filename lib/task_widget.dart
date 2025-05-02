@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class TaskWidget extends StatelessWidget {
   final String title;
@@ -15,16 +14,16 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget emoji = SvgPicture.asset(
-      switch (status) {
-        "in progress" => './assets/images/wip.svg',
-        "complete"    => './assets/images/done.svg',
-        "not started" => './assets/images/todo.svg',
-        _             => 'assets/images/question.svg',
-      },
-      width: 35.0,
-    );
-    String spacer = (isSubTask) ? "      ↳  " : "";
+    String statusDone = "✅";
+    String statusNotStarted = "💤";
+    String statusInProgress = "🏃";
+String emoji =  switch(status) {
+  "complete" => statusDone,
+  "in progress" => statusInProgress,
+  "not started" => statusNotStarted,
+  _ => "❔"
+};
+    String spacer = (isSubTask) ? "      - " : "";
     TextStyle descStyle = (isSubTask)
         ? const TextStyle(
             decoration  : TextDecoration.underline,
@@ -34,7 +33,7 @@ class TaskWidget extends StatelessWidget {
     return Row(
       children: [
         Text(spacer),
-        emoji,
+        Text(emoji),
         Text('[$status]'),
         Text(
           title,
